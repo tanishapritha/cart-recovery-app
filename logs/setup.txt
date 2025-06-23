@@ -1,0 +1,11 @@
+
+
+cd cart-recovery-frontend
+npm run dev
+
+cd cart_recovery_project
+myenv/Scripts/activate
+
+flask run
+
+(for new users, create virtual environment first)

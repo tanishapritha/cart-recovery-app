@@ -1,0 +1,47 @@
+cart-recovery
+
+1. Finish the Register page and test backend integration
+   - Make sure user registration works via frontend and Postman
+   - Handle errors and validations
+
+2. Build the Items page
+   - Display a list of items
+   - Allow adding new items through a form
+   - Backend: endpoint to create and list items
+
+3. Build the Cart page
+   - Show selected items with quantities
+   - Allow adding/removing items to/from cart
+   - Backend: endpoints to handle cart actions
+
+4. Build the Checkout page
+   - Confirm the cart and mark as purchased
+   - Backend: endpoint to mark cart as purchased or checked out
+
+5. Implement abandoned cart tracking
+   - Set a timeout or check for inactivity
+   - Automatically log abandoned carts
+   - Backend: scheduled job or time-based logic
+
+6. Build the Abandoned Carts page
+   - List all abandoned carts with details
+   - Allow manual follow-up or reminders
+   - Backend: endpoint to fetch abandonment logs
+
+7. Add basic authentication if needed
+   - Allow login by email
+   - Restrict actions to the same user (optional)
+
+8. Polish the UI
+   - Add loading states, success/error messages
+   - Improve layout and responsiveness
+   - Use consistent styling
+
+9. Testing
+   - Test each feature from UI and Postman
+   - Fix broken flows or edge cases
+
+10. Final cleanup
+   - Remove unused files
+   - Add comments and instructions
+   - Push to GitHub

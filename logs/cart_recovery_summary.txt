@@ -1,0 +1,62 @@
+
+🔄 Cart Recovery Web App – Project Summary for ChatGPT
+
+🎯 Goal of the Project:
+Build a shopping cart system with recovery features – if a user adds items to cart but doesn’t checkout, the backend logs the abandonment and can later notify or track it.
+
+🛠️ Tech Stack Used:
+- Frontend: React (JSX files, functional components, fetch API)
+- Backend: Flask (Python), REST API
+- Database: SQLite (via SQLAlchemy ORM)
+- Task Scheduler: APScheduler (to check for abandoned carts periodically)
+- Other tools: CORS handled via Flask-CORS
+
+✅ Features Already Done:
+
+Backend:
+- ✔️ User, Item, Cart, and CartItem models created with SQLAlchemy
+- ✔️ API routes:
+  - /item/add: Add new item
+  - /item/all: Get all items
+  - /user/register: Register user
+  - /cart/add: Add item to user’s cart
+  - /cart/view?user_id=1: View current cart of user
+  - /cart/checkout: Checkout user’s cart
+  - /cart/report: Show abandoned carts report (WIP)
+- ✔️ Seeded DB with 1 user and 3 items
+- ✔️ Resolved CORS issues
+- ✔️ Fixed model relationship issues and backref conflicts
+- ✔️ Scheduled task that logs abandoned carts every 5 minutes (still fine-tuning)
+
+Frontend:
+- ✔️ Items.jsx: Lists all items + lets user add new ones
+- ✔️ Checkout.jsx: Lets user checkout their cart
+- ✔️ Cart view fetch attempted
+- ✔️ Working with hardcoded user_id = 1
+
+📦 What I Want to Build:
+1. 🛍️ Add-to-Cart Button in item list
+2. 🧺 Cart View Page that:
+   - Shows all items in cart
+   - Shows total amount
+   - Allows removing/editing items
+3. ✅ Checkout flow
+4. 🔄 Abandonment detection:
+   - If cart not updated for N minutes → log it
+5. 📩 (Optional) Send email reminders or show dashboard report
+
+📚 What I Asked Recently:
+> "What should I learn to understand this code and the database better?"
+
+🧠 I Want to Learn:
+- Backend → Flask and API design
+- Frontend → React + clean component logic
+- Database → SQLAlchemy, DB schemas, relationships
+- General → Debugging, understanding full stack flow
+
+🧾 Last Code Worked On:
+- Items.jsx: fetch items + post new item
+- handleAddToCart(itemId) function
+- Added console logs to debug
+- Backend running on http://localhost:5000
+- One user exists with user_id = 1
