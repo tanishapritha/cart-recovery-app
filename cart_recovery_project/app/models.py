@@ -10,13 +10,7 @@ class User(db.Model):
     carts = db.relationship('Cart', backref='user', lazy=True)
 
 
-class Item(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    price = db.Column(db.Float)
 
-    # One item can appear in many cart items
-    cart_items = db.relationship('CartItem', backref='item', lazy=True)
 
 
 class Cart(db.Model):
@@ -29,11 +23,24 @@ class Cart(db.Model):
     cart_items = db.relationship('CartItem', backref='cart', lazy=True)
 
 
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    price = db.Column(db.Float)
+
+    # Define one side with backref
+    cart_items = db.relationship('CartItem', backref='item', lazy=True)
+
+
 class CartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), nullable=False)
     item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
     quantity = db.Column(db.Integer)
+
+    # ❌ REMOVE this line:
+    # item = db.relationship('Item', backref='cart_items')
+
 
 
 class AbandonmentLog(db.Model):

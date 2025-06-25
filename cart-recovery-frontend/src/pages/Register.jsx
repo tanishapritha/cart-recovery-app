@@ -1,8 +1,5 @@
-// src/pages/Register.jsx
 import { useState } from 'react';
 import api from '../api';
-import InputField from '../components/InputField';
-import Button from '../components/Button';
 
 function Register() {
   const [form, setForm] = useState({ name: '', email: '' });
@@ -23,14 +20,72 @@ function Register() {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '400px' }}>
-      <h2>Register User</h2>
-      <form onSubmit={handleSubmit}>
-        <InputField label="Name" name="name" value={form.name} onChange={handleChange} />
-        <InputField label="Email" name="email" value={form.email} onChange={handleChange} type="email" />
-        <Button type="submit">Register</Button>
-      </form>
-      {message && <p>{message}</p>}
+    <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center px-4 font-inter pt-24">
+
+      <div className="w-full max-w-sm bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
+        <h2 className="text-2xl font-semibold text-center text-[#4C5C68] mb-1">
+          Create Account
+        </h2>
+        <p className="text-sm text-gray-500 text-center mb-5">
+          Enter your details to register
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Name Input */}
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              Full Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={form.name}
+              onChange={handleChange}
+              required
+              placeholder="John Doe"
+              className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-sm focus:border-[#4C5C68] focus:ring-2 focus:ring-[#4C5C68]/30 outline-none transition"
+            />
+          </div>
+
+          {/* Email Input */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Email Address
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+              placeholder="you@example.com"
+              className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-sm focus:border-[#4C5C68] focus:ring-2 focus:ring-[#4C5C68]/30 outline-none transition"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-[#4C5C68] hover:bg-[#5E7386] text-white text-sm font-semibold py-2.5 rounded-lg transition duration-200 shadow-md hover:shadow-lg"
+          >
+            Register
+          </button>
+        </form>
+
+        {message && (
+          <div
+            className={`mt-4 text-center text-sm font-medium rounded-md p-2 ${
+              message.startsWith('✅')
+                ? 'text-green-600 bg-green-50'
+                : 'text-red-600 bg-red-50'
+            }`}
+          >
+            {message}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

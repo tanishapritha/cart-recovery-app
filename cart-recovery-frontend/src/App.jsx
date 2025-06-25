@@ -6,11 +6,14 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import AbandonedCarts from './pages/AbandonedCarts';
 
+
+
+
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div style={{ padding: '20px' }}>
+      <div className="max-w-4xl mx-auto p-6">
         <Routes>
           <Route path="/" element={<Register />} />
           <Route path="/items" element={<Items />} />
