@@ -11,13 +11,11 @@ def add_to_cart():
     data = request.get_json()
     cart = Cart.query.filter_by(user_id=data['user_id'], status='active').first()
     
-    # Create new cart if not exists
     if not cart:
         cart = Cart(user_id=data['user_id'])
         db.session.add(cart)
         db.session.commit()
 
-    # Add item to cart
     item = CartItem(cart_id=cart.id, item_id=data['item_id'], quantity=data['quantity'])
     cart.last_updated = datetime.utcnow()
     db.session.add(item)
@@ -25,7 +23,7 @@ def add_to_cart():
     
     return jsonify({'message': 'Item added to cart'}), 200
 
-# Remove item from cart
+# Remove item
 @bp.route('/remove', methods=['POST'])
 def remove_item():
     data = request.get_json()
@@ -49,7 +47,7 @@ def checkout():
     db.session.commit()
     return jsonify({'message': 'Cart checked out'}), 200
 
-# View cart (✅ fixed structure)
+# View cart (returns cart_id + items)
 @bp.route('/view', methods=['GET'])
 def view_cart():
     user_id = request.args.get('user_id')
@@ -57,18 +55,20 @@ def view_cart():
     if not cart:
         return jsonify({'message': 'No active cart'}), 404
 
-    result = []
-    for i in cart.cart_items:  # ✅ fixed
-        item = i.item  # SQLAlchemy relationship
-        result.append({
+    items = []
+    for i in cart.cart_items:
+        item = i.item
+        items.append({
             'item_id': item.id,
             'item_name': item.name,
             'price': item.price,
             'quantity': i.quantity
         })
 
-    return jsonify(result)
-
+    return jsonify({
+        'cart_id': cart.id,
+        'items': items
+    })
 
 # Abandonment report
 @bp.route('/report', methods=['GET'])
