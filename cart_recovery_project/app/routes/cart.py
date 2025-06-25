@@ -6,11 +6,27 @@ from app.extensions import db
 bp = Blueprint('cart', __name__, url_prefix='/cart')
 
 # Add to cart
+from app.models import User
+from sqlalchemy.exc import IntegrityError
+
 @bp.route('/add', methods=['POST'])
 def add_to_cart():
     data = request.get_json()
+
+    # Ensure user exists with email
+    user = User.query.filter_by(id=data['user_id']).first()
+    if not user:
+        if 'email' not in data:
+            return jsonify({'message': 'Email required to create user'}), 400
+        user = User(id=data['user_id'], email=data['email'])
+        db.session.add(user)
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            return jsonify({'message': 'User creation failed'}), 500
+
     cart = Cart.query.filter_by(user_id=data['user_id'], status='active').first()
-    
     if not cart:
         cart = Cart(user_id=data['user_id'])
         db.session.add(cart)
@@ -22,6 +38,7 @@ def add_to_cart():
     db.session.commit()
     
     return jsonify({'message': 'Item added to cart'}), 200
+
 
 # Remove item
 @bp.route('/remove', methods=['POST'])

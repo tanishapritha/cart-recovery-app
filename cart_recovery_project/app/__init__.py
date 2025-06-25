@@ -2,11 +2,24 @@ from flask import Flask
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.extensions import db  # ✅ import db from extensions
 from flask_cors import CORS
+from flask_mail import Mail
 
-
+mail = Mail()
 
 def create_app():
     app = Flask(__name__)
+    app.config.update(
+        MAIL_SERVER='smtp.gmail.com',
+        MAIL_PORT=587,
+        MAIL_USE_TLS=True,
+        MAIL_USERNAME='your_email@gmail.com',
+        MAIL_PASSWORD='your_app_password',  # Use app password if Gmail
+        MAIL_DEFAULT_SENDER='your_email@gmail.com'
+    )
+
+    mail.init_app(app)
+
+
     CORS(app, resources={r"/*": {"origins": "*"}})
 
     app.config.from_object('app.config.Config')
@@ -31,3 +44,4 @@ def create_app():
         return "✅ Flask App is Running"
 
     return app
+

@@ -2,3 +2,4 @@ Flask
 Flask-SQLAlchemy
 APScheduler
 flask_cors
+flask-mail
