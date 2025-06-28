@@ -1,8 +1,8 @@
 # Cart Recovery System
-
+---
 This is a backend system built with Flask for monitoring and managing abandoned carts in an e-commerce context. A basic HTML frontend page displays abandoned carts for business insight.
 https://cart-recovery-app.vercel.app/
----
+
 
 ## Features
 
