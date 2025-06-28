@@ -5,3 +5,4 @@ flask_cors
 flask-mail
 Flask-Migrate
 sqlite3
+gunicorn
