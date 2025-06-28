@@ -65,10 +65,10 @@ https://cart-recovery-app.vercel.app/
 
 ## Screenshots
 
-- [Cart View](screenshots/cart-page.png)
-- [Add Item Flow](screenshots/user-cart.png)
-- [Backend Running](screenshots/backend-console.png)
-- [Database Seed Confirmation](screenshots/seed-success.png)
+- [Register](screenshots/register.png)
+- [Items](screenshots/add-to-cart.png)
+- [Checkout](screenshots/confirm-checkout.png)
+- [Abandoned Cart DB](screenshots/abandoned.png)
 
 ---
 
