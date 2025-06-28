@@ -1,11 +1,11 @@
 services:
   - type: web
     name: cart-backend
-    env: python
+    runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn 'app:create_app()'
+    startCommand: bash -c "flask --app app:create_app db upgrade && gunicorn 'app:create_app()'"
     envVars:
       - key: FLASK_ENV
         value: production
       - key: DATABASE_URL
-        value: sqlite:///db.sqlite3
+        value: postgresql://cart_user:zn7ktm2nV1n7ifau9DleHguHMXBLolT8@dpg-d1fv8iripnbc73a3m0cg-a/cart_db
