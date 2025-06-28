@@ -3,3 +3,5 @@ Flask-SQLAlchemy
 APScheduler
 flask_cors
 flask-mail
+Flask-Migrate
+sqlite3

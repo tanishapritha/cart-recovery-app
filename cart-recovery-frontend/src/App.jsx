@@ -4,7 +4,7 @@ import Register from './pages/Register';
 import Items from './pages/Items';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
-import AbandonedCarts from './pages/AbandonedCarts';
+
 
 
 
@@ -19,7 +19,7 @@ function App() {
           <Route path="/items" element={<Items />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/abandoned-carts" element={<AbandonedCarts />} />
+
         </Routes>
       </div>
     </BrowserRouter>

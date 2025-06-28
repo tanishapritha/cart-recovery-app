@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abandoned Carts</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      padding: 2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+    }
+    th {
+      background: #f2f2f2;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛒 Abandoned Carts Report</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Cart ID</th>
+        <th>User ID</th>
+        <th>Email</th>
+        <th>Last Updated</th>
+      </tr>
+    </thead>
+    <tbody id="report-body">
+      <!-- Data will be inserted here -->
+    </tbody>
+  </table>
+
+  <script>
+    fetch('http://localhost:5000/cart/cart/report')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById('report-body');
+        data.forEach(entry => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${entry.cart_id}</td>
+            <td>${entry.user_id}</td>
+            <td>${entry.email || 'N/A'}</td>
+            <td>${new Date(entry.last_updated).toLocaleString()}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(err => {
+        document.body.innerHTML = `<p style="color: red;">Error loading data.</p>`;
+        console.error('Error fetching report:', err);
+      });
+  </script>
+</body>
+</html>

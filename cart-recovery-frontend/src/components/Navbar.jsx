@@ -6,7 +6,7 @@ function Navbar() {
     { name: 'Items', path: '/items' },
     { name: 'Cart', path: '/cart' },
     { name: 'Checkout', path: '/checkout' },
-    { name: 'Abandoned Carts', path: '/abandoned-carts' },
+
   ];
 
   return (

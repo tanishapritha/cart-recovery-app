@@ -1,14 +1,16 @@
 from app.extensions import db
 from datetime import datetime
+from sqlalchemy.schema import UniqueConstraint
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    email = db.Column(db.String(100))
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(120), nullable=False)
+    __table_args__ = (UniqueConstraint('email', name='uq_user_email'),)
 
-    # One user can have many carts
-    carts = db.relationship('Cart', backref='user', lazy=True)
-
+    __table_args__ = (
+        UniqueConstraint('email', name='uq_user_email'),
+    )
 
 
 
@@ -18,6 +20,9 @@ class Cart(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     status = db.Column(db.String(20), default='active')
     last_updated = db.Column(db.DateTime, default=datetime.utcnow)
+
+ 
+    user = db.relationship('User', backref='carts', lazy=True)
 
     # One cart has many cart items
     cart_items = db.relationship('CartItem', backref='cart', lazy=True)
@@ -48,3 +53,11 @@ class AbandonmentLog(db.Model):
     cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), nullable=False)
     abandoned_at = db.Column(db.DateTime, default=datetime.utcnow)
     notified = db.Column(db.Boolean, default=False)
+
+
+class EmailLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120))
+    subject = db.Column(db.String(255))
+    body = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)

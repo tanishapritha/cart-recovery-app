@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from datetime import datetime
 from app.models import Cart, CartItem
 from app.extensions import db
@@ -88,13 +88,22 @@ def view_cart():
     })
 
 # Abandonment report
-@bp.route('/report', methods=['GET'])
+
+
+
+@bp.route('/cart/report')
 def abandoned_report():
-    carts = Cart.query.filter_by(status='abandoned').all()
-    return jsonify([
-        {
-            'cart_id': c.id,
-            'user_id': c.user_id,
-            'last_updated': c.last_updated.isoformat()
-        } for c in carts
-    ])
+    abandoned = Cart.query.filter_by(status='abandoned').all()
+    data = [{
+        "cart_id": cart.id,
+        "user_id": cart.user_id,
+        "email": cart.user.email if cart.user else None,
+        "last_updated": cart.last_updated.isoformat()
+    } for cart in abandoned]
+    return jsonify(data)
+
+
+
+@bp.route('/abandoned')
+def abandoned_page():
+    return render_template('abandoned.html')

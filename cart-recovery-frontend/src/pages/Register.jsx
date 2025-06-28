@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
 function Register() {
   const [form, setForm] = useState({ name: '', email: '' });
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -13,7 +15,22 @@ function Register() {
     e.preventDefault();
     try {
       const res = await api.post('/user/register', form);
-      setMessage(`✅ Registered! User ID: ${res.data.id}`);
+      const userId = res.data.id;
+
+      setMessage(`✅ Registered! User ID: ${userId}`);
+
+      // Save user info to localStorage
+      localStorage.setItem('user', JSON.stringify({
+        id: userId,
+        name: form.name,
+        email: form.email
+      }));
+
+      // Redirect to items page after short delay
+      setTimeout(() => {
+        navigate('/items');
+      }, 1000);
+
     } catch (err) {
       setMessage(`❌ ${err.response?.data?.error || err.message}`);
     }
@@ -21,7 +38,6 @@ function Register() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center px-4 font-inter pt-24">
-
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
         <h2 className="text-2xl font-semibold text-center text-[#4C5C68] mb-1">
           Create Account
