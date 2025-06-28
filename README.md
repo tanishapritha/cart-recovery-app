@@ -65,12 +65,21 @@ https://cart-recovery-app.vercel.app/
 
 ## Screenshots
 
-- [Register](screenshots/register.png)
-- [Items](screenshots/add-to-cart.png)
-- [Checkout](screenshots/confirm-checkout.png)
-- [Abandoned Cart DB](screenshots/abandoned.png)
+### Register
+<img src="screenshots/register.png" width="400"/>
+
+### Add to Cart
+<img src="screenshots/add-to-cart.png" width="400"/>
+
+### Checkout
+<img src="screenshots/confirm-checkout.png" width="400"/>
+
+### Abandoned Cart DB
+<img src="screenshots/abandoned.png" width="400"/>
+
 
 ---
+
 
 ## Setup (Local Only)
 
