@@ -88,7 +88,7 @@ https://cart-recovery-app.vercel.app/
 ### 1. Clone the project
 
 ```bash
-git clone https://github.com/yourusername/cart-recovery.git
+git clone https://github.com/tanishapritha/cart-recovery-app.git
 cd cart-recovery
 ```
 
